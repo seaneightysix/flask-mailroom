@@ -19,20 +19,18 @@ def all():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 
-    #if 'username' not in session:
-        #return redirect(url_for('login'))
-
-    donors = Donor.select()
-
     if request.method == 'POST':
-        donation = Donation(value=request.form['donation'])
-        donation.donor = donor=request.form['donor']
-        donation.save()
+        try:
+            donor1 = Donor.select().where(Donor.name==request.form['donor']).get()
+            Donation.insert(donor=donor1.id, value=int(request.form['donation'])).execute()
+        except:
+            return render_template('create.jinja2', error=format(request.form['donor'] + ' is not in the database. Please try again.'))
 
-        return redirect(url_for('create'))
+        else:
+            return redirect(url_for('create'))
 
     else:
-        return render_template('create.jinja2', donors=donors)
+        return render_template('create.jinja2')
     
 
 if __name__ == "__main__":
