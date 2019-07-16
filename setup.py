@@ -1,18 +1,26 @@
-"""
-Scripts to run to set up our database
-"""
-from datetime import datetime
-from model import db, User, Task
-from passlib.hash import pbkdf2_sha256
+import random
 
+from model import db, Donor, Donation 
 
-# Create the database tables for our model
 db.connect()
-db.drop_tables([User, Task])
-db.create_tables([User, Task])
 
-Task(name="Do the laundry.").save()
-Task(name="Do the dishes.", performed=datetime.now()).save()
+# This line will allow you "upgrade" an existing database by
+# dropping all existing tables from it.
+db.drop_tables([Donor, Donation])
 
-User(name="admin", password=pbkdf2_sha256.hash("password")).save()
-User(name="bob", password=pbkdf2_sha256.hash("bobbob")).save()
+db.create_tables([Donor, Donation])
+
+alice = Donor(name="Alice")
+alice.save()
+
+bob = Donor(name="Bob")
+bob.save()
+
+charlie = Donor(name="Charlie")
+charlie.save()
+
+donors = [alice, bob, charlie]
+
+for x in range(30):
+    Donation(donor=random.choice(donors), value=random.randint(100, 10000)).save()
+

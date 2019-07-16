@@ -1,20 +1,14 @@
 <html>
 <head>
-<title>My Todo List</title>
+<title>Mailroom</title>
 </head>
 <body>
-<<<<<<< HEAD
-    <h1>My Todo List</h1>
-    <h2>{% block subtitle %} {% endblock subtitle %}</h2>
-    {% block content %} {% endblock content %}
-=======
-	 <nav>
+     <nav>
         <a id="donations" href="{{ url_for('all') }}">View Donations</a>
         <a id="create" href="{{ url_for('create') }}">Add a Donation</a>
     </nav>
-	<h1>My Donations</h1>
-	<h2>{% block subtitle %} {% endblock subtitle %}</h2>
-	{% block content %} {% endblock content %}
->>>>>>> 5011f3f1ca4850e05373dd2f15b9f3d8770b405c
+    <h1>My Donations</h1>
+    <h2>{% block subtitle %} {% endblock subtitle %}</h2>
+    {% block content %} {% endblock content %}
 </body>
 </html>
